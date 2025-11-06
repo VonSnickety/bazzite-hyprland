@@ -1,0 +1,151 @@
+/* Phrolova Theme - Waybar Styling */
+/* Maroon/Red Lycoris color scheme */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrains Mono", "Font Awesome 6 Free";
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(29, 10, 14, 0.95);
+    color: #FFDDE1;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    background-color: transparent;
+    color: #DC667C;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button:hover {
+    background: rgba(160, 29, 63, 0.2);
+    color: #FF6B88;
+}
+
+#workspaces button.active {
+    color: #FFB3C1;
+    border-bottom: 3px solid #DC143C;
+    background: rgba(220, 20, 60, 0.2);
+}
+
+#workspaces button.urgent {
+    background-color: #8B1538;
+    color: #FFD0D8;
+}
+
+#window,
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#tray {
+    padding: 0 10px;
+    margin: 0 2px;
+    background-color: rgba(45, 10, 20, 0.8);
+    color: #FFDDE1;
+}
+
+#window {
+    color: #FFB3C1;
+    font-weight: bold;
+}
+
+#clock {
+    background-color: rgba(160, 29, 63, 0.3);
+    color: #FFD0D8;
+    font-weight: bold;
+}
+
+#battery {
+    color: #FF99AA;
+}
+
+#battery.charging {
+    color: #4DFF88;
+}
+
+#battery.warning:not(.charging) {
+    color: #FFB366;
+    animation: blink 1s linear infinite;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #8B1538;
+    color: #FFD0D8;
+    animation: blink 0.5s linear infinite;
+}
+
+@keyframes blink {
+    to {
+        opacity: 0.5;
+    }
+}
+
+#cpu {
+    color: #FF8899;
+}
+
+#memory {
+    color: #FFAABB;
+}
+
+#temperature {
+    color: #FF6B88;
+}
+
+#temperature.critical {
+    background-color: #A01D3F;
+    color: #FFD0D8;
+}
+
+#network {
+    color: #FFB3C1;
+}
+
+#network.disconnected {
+    color: #8B1538;
+}
+
+#pulseaudio {
+    color: #DC667C;
+}
+
+#pulseaudio.muted {
+    color: #663344;
+}
+
+#tray {
+    background-color: rgba(45, 10, 20, 0.8);
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #A01D3F;
+}
+
+tooltip {
+    background: rgba(29, 10, 14, 0.95);
+    border: 2px solid #A01D3F;
+    color: #FFDDE1;
+}
+
+tooltip label {
+    color: #FFDDE1;
+}

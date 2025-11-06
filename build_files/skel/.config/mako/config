@@ -1,0 +1,44 @@
+# Phrolova Theme - Mako Notification Configuration
+# Maroon/Red Lycoris color scheme
+
+# Appearance
+font=JetBrains Mono 10
+background-color=#1D0A0EF0
+text-color=#FFDDE1
+border-color=#A01D3F
+border-size=2
+border-radius=8
+padding=15
+margin=10
+width=350
+height=150
+
+# Icons
+icon-path=/usr/share/icons/Papirus-Dark
+max-icon-size=48
+
+# Behavior
+default-timeout=5000
+ignore-timeout=0
+
+# Grouping
+group-by=app-name
+
+# Urgency levels
+[urgency=low]
+border-color=#4D2632
+background-color=#1D0A0EE0
+
+[urgency=normal]
+border-color=#A01D3F
+background-color=#1D0A0EF0
+
+[urgency=critical]
+border-color=#DC143C
+background-color=#8B1538F0
+text-color=#FFD0D8
+default-timeout=0
+
+# Position
+anchor=top-right
+layer=overlay

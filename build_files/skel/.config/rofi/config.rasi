@@ -1,0 +1,132 @@
+/* Phrolova Theme - Rofi Configuration */
+/* Maroon/Red Lycoris color scheme */
+
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    terminal: "kitty";
+    drun-display-format: "{name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "  Apps";
+    display-run: "  Run";
+    display-window: " 﩯 Window";
+    sidebar-mode: true;
+}
+
+* {
+    bg-col: #1D0A0E;
+    bg-col-light: #2D0A14;
+    border-col: #A01D3F;
+    selected-col: #DC143C;
+    red: #DC143C;
+    red-light: #FF6B88;
+    fg-col: #FFDDE1;
+    fg-col2: #DC667C;
+    grey: #4D2632;
+
+    width: 600;
+    font: "JetBrains Mono 11";
+}
+
+element-text, element-icon , mode-switcher {
+    background-color: inherit;
+    text-color: inherit;
+}
+
+window {
+    height: 400px;
+    border: 3px;
+    border-color: @border-col;
+    background-color: @bg-col;
+    border-radius: 8px;
+}
+
+mainbox {
+    background-color: @bg-col;
+}
+
+inputbar {
+    children: [prompt,entry];
+    background-color: @bg-col-light;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 10px;
+}
+
+prompt {
+    background-color: @selected-col;
+    padding: 8px;
+    text-color: @fg-col;
+    border-radius: 4px;
+    margin: 0px 8px 0px 0px;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+}
+
+entry {
+    padding: 8px;
+    text-color: @fg-col;
+    background-color: @bg-col-light;
+}
+
+listview {
+    border: 0px 0px 0px;
+    padding: 6px 0px 0px;
+    margin: 10px 10px 0px 10px;
+    columns: 1;
+    lines: 8;
+    background-color: @bg-col;
+}
+
+element {
+    padding: 8px;
+    background-color: @bg-col;
+    text-color: @fg-col;
+    border-radius: 4px;
+}
+
+element-icon {
+    size: 25px;
+}
+
+element selected {
+    background-color: @selected-col;
+    text-color: @fg-col;
+}
+
+mode-switcher {
+    spacing: 0;
+    margin: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color: @bg-col-light;
+    text-color: @fg-col2;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+    border-radius: 4px;
+}
+
+button selected {
+    background-color: @selected-col;
+    text-color: @fg-col;
+}
+
+message {
+    background-color: @bg-col-light;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+textbox {
+    padding: 8px;
+    background-color: @bg-col-light;
+    text-color: @fg-col;
+}
