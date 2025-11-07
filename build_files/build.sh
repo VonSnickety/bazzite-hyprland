@@ -119,7 +119,7 @@ dnf5 install -y \
     pavucontrol \
     network-manager-applet \
     blueman \
-    polkit-gnome
+    hyprpolkitagent
 
 # Fonts for rice (these are likely already installed in bazzite-dx, install extra if available)
 dnf5 install -y \
