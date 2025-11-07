@@ -17,7 +17,7 @@ A minimal Hyprland setup on Bazzite with a Nordic-inspired theme.
 This image is built on Bazzite. To switch to this image, run the following command:
 
 ```bash
-sudo bootc switch ghcr.io/vonsnickety/bazzite-hyprland:latest
+rpm-ostree rebase ostree-unverified-registry:ghcr.io/vonsnickety/bazzite-hyprland:latest
 ```
 
 After the command finishes, reboot your system:
