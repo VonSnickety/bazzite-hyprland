@@ -91,7 +91,7 @@ dnf5 install -y \
     xdg-desktop-portal-hyprland
 
 # Display manager
-dnf5 install -y greetd greetd-tuigreet
+dnf5 install -y greetd regreet cage
 
 # Remove SDDM's display-manager symlink if it exists
 rm -f /etc/systemd/system/display-manager.service
@@ -99,15 +99,36 @@ rm -f /etc/systemd/system/display-manager.service
 # Enable greetd
 systemctl enable greetd
 
-# Configure greetd to use tuigreet
+# Configure greetd to use regreet in cage compositor
 mkdir -p /etc/greetd
 cat > /etc/greetd/config.toml << 'EOF'
 [terminal]
 vt = 1
 
 [default_session]
-command = "tuigreet --cmd Hyprland --time --remember --remember-session"
+command = "cage -s -- regreet"
 user = "greeter"
+EOF
+
+# Configure regreet for modern, sleek look
+mkdir -p /etc/greetd
+cat > /etc/greetd/regreet.toml << 'EOF'
+[background]
+fit = "Cover"
+
+[GTK]
+application_prefer_dark_theme = true
+cursor_theme_name = "Adwaita"
+font_name = "JetBrains Mono 11"
+icon_theme_name = "Papirus-Dark"
+theme_name = "Adwaita-dark"
+
+[appearance]
+greeting_msg = "Welcome to Bazzite Hyprland"
+
+[commands]
+reboot = [ "systemctl", "reboot" ]
+poweroff = [ "systemctl", "poweroff" ]
 EOF
 
 # Disable COPRs so they don't end up enabled on the final image
