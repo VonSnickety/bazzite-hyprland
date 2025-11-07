@@ -104,26 +104,23 @@ dnf5 install -y \
     xdg-desktop-portal-hyprland
 
 # Install display manager components
-dnf5 install -y greetd tuigreet cage
+# Enable ly COPR repository
+dnf5 -y copr enable dhalucario/ly
+
+# Install ly display manager
+dnf5 install -y ly
 
 # Remove SDDM's display-manager symlink if it exists
 rm -f /etc/systemd/system/display-manager.service
 
-# Enable greetd
-systemctl enable greetd
-
-# Configure greetd to use tuigreet with cage compositor
-mkdir -p /etc/greetd
-cat > /etc/greetd/config.toml << 'EOF'
-[terminal]
-vt = 1
-
-[default_session]
-command = "cage -s -- tuigreet --time --remember-user --cmd Hyprland"
-user = "greeter"
-EOF
+# Enable ly
+systemctl enable ly.service
 
 # Disable COPRs so they don't end up enabled on the final image
+# Check if dhalucario/ly COPR is enabled before disabling
+if dnf5 copr list | grep -q "dhalucario/ly"; then
+    dnf5 -y copr disable dhalucario/ly
+fi
 # Check if solopasha/hyprland COPR is enabled before disabling
 if dnf5 copr list | grep -q "solopasha/hyprland"; then
     dnf5 -y copr disable solopasha/hyprland
