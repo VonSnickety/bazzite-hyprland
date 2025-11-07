@@ -87,7 +87,8 @@ rpm-ostree override remove \
 # Basic utilities
 dnf5 install -y tmux \
     firefox \
-    fish
+    fish \
+    fastfetch
 
 ### Hyprland Rice Setup
 
@@ -104,31 +105,26 @@ dnf5 install -y \
     xdg-desktop-portal-hyprland
 
 # Install display manager components
-# Enable ly COPR repository
-dnf5 -y copr enable dhalucario/ly
-
-# Install ly display manager
-dnf5 install -y ly
+# Using greetd + tuigreet + cage compositor from main repos
+dnf5 install -y greetd tuigreet cage
 
 # Remove SDDM's display-manager symlink if it exists
 rm -f /etc/systemd/system/display-manager.service
 
-# Enable ly
-systemctl enable ly.service
+# Configure greetd to use tuigreet with cage compositor
+# cage provides the Wayland environment needed for tuigreet to render
+mkdir -p /etc/greetd
+cat > /etc/greetd/config.toml << 'EOF'
+[terminal]
+vt = 1
 
-# Disable COPRs so they don't end up enabled on the final image
-# Check if dhalucario/ly COPR is enabled before disabling
-if dnf5 copr list | grep -q "dhalucario/ly"; then
-    dnf5 -y copr disable dhalucario/ly
-fi
-# Check if solopasha/hyprland COPR is enabled before disabling
-if dnf5 copr list | grep -q "solopasha/hyprland"; then
-    dnf5 -y copr disable solopasha/hyprland
-fi
-# Check if lihaohong/yazi COPR is enabled before disabling
-if dnf5 copr list | grep -q "lihaohong/yazi"; then
-    dnf5 -y copr disable lihaohong/yazi
-fi
+[default_session]
+command = "cage -s -- tuigreet --time --remember --remember-user-session --cmd Hyprland"
+user = "greeter"
+EOF
+
+# Enable greetd
+systemctl enable greetd.service
 
 # Status bar & launcher
 dnf5 install -y \
@@ -165,7 +161,7 @@ dnf5 install -y \
     fontawesome-fonts-all \
     || true
 
-# File manager & viewers (using Dolphin from KDE)
+# File manager & viewers
 dnf5 -y copr enable lihaohong/yazi
 dnf5 install -y \
     imv \
@@ -179,6 +175,24 @@ dnf5 install -y \
     qt5ct \
     qt6ct \
     papirus-icon-theme
+
+# Disable all COPRs so they don't end up enabled on the final image
+# Check if solopasha/hyprland COPR is enabled before disabling
+if dnf5 copr list | grep -q "solopasha/hyprland"; then
+    dnf5 -y copr disable solopasha/hyprland
+fi
+# Check if lihaohong/yazi COPR is enabled before disabling
+if dnf5 copr list | grep -q "lihaohong/yazi"; then
+    dnf5 -y copr disable lihaohong/yazi
+fi
+
+### Deploy User Configuration Files
+
+# Copy skeleton files to /etc/skel for new users
+cp -r /ctx/skel/. /etc/skel/
+
+# Set proper permissions
+chmod -R 755 /etc/skel/.config
 
 #### System Services
 
