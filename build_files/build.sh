@@ -72,7 +72,8 @@ rpm-ostree override remove \
 
 # Basic utilities
 dnf5 install -y tmux \
-    firefox
+    firefox \
+    fish
 
 ### Hyprland Rice Setup
 
@@ -161,8 +162,17 @@ dnf5 install -y \
 
 systemctl enable podman.socket
 
-# Set fish as default shell
+# Set fish as default shell for all users
+# First, ensure fish is in /etc/shells (dnf should handle this, but just in case)
+grep -q '/usr/bin/fish' /etc/shells || echo '/usr/bin/fish' >> /etc/shells
+
+# Set fish as default shell for root
 usermod -s /usr/bin/fish root
+
+# Set fish as the default shell for new users by modifying useradd defaults
+sed -i 's|SHELL=.*|SHELL=/usr/bin/fish|' /etc/default/useradd || echo "SHELL=/usr/bin/fish" >> /etc/default/useradd
+
+# Set SHELL environment variable globally
 echo "SHELL=/usr/bin/fish" >> /etc/environment
 
 
