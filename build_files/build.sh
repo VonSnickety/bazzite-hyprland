@@ -106,7 +106,7 @@ cat > /etc/greetd/config.toml << 'EOF'
 vt = 1
 
 [default_session]
-command = "tuigreet --cmd Hyprland --time --remember --remember-session"
+command = "tuigreet --cmd /usr/bin/Hyprland --time --remember --remember-session"
 user = "greeter"
 EOF
 
