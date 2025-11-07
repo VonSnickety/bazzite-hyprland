@@ -87,8 +87,21 @@ dnf5 install -y \
     hyprlock \
     hyprutils \
     xdg-desktop-portal-hyprland
-dnf5 install -y sddm
-systemctl enable sddm
+
+# Display manager
+dnf5 install -y greetd greetd-tuigreet
+systemctl enable greetd
+
+# Configure greetd to use tuigreet
+mkdir -p /etc/greetd
+cat > /etc/greetd/config.toml << 'EOF'
+[terminal]
+vt = 1
+
+[default_session]
+command = "tuigreet --cmd Hyprland --time --remember --remember-session"
+user = "greeter"
+EOF
 
 # Disable COPRs so they don't end up enabled on the final image
 dnf5 -y copr disable solopasha/hyprland
