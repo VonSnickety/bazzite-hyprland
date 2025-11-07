@@ -112,14 +112,14 @@ rm -f /etc/systemd/system/display-manager.service
 # Enable greetd
 systemctl enable greetd
 
-# Configure greetd to use tuigreet
+# Configure greetd to use tuigreet with cage compositor
 mkdir -p /etc/greetd
 cat > /etc/greetd/config.toml << 'EOF'
 [terminal]
 vt = 1
 
 [default_session]
-command = "tuigreet --time --remember-user --cmd Hyprland"
+command = "cage -s -- tuigreet --time --remember-user --cmd Hyprland"
 user = "greeter"
 EOF
 
