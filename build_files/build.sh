@@ -26,7 +26,7 @@ rpm-ostree override remove \
     speech-dispatcher \
     || true
 
-# Remove Extra KDE Apps
+# Remove Extra KDE Apps and SDDM
 rpm-ostree override remove \
     kate \
     kwrite \
@@ -35,6 +35,7 @@ rpm-ostree override remove \
     kde-connect \
     plasma-discover \
     plasma-desktop \
+    sddm \
     || true
 
 # Remove Handheld and Emulator Stuff
@@ -91,6 +92,11 @@ dnf5 install -y \
 
 # Display manager
 dnf5 install -y greetd greetd-tuigreet
+
+# Remove SDDM's display-manager symlink if it exists
+rm -f /etc/systemd/system/display-manager.service
+
+# Enable greetd
 systemctl enable greetd
 
 # Configure greetd to use tuigreet
