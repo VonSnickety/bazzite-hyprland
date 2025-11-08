@@ -94,13 +94,15 @@ dnf5 install -y tmux \
 # Enable Hyprland COPR repository
 dnf5 -y copr enable solopasha/hyprland
 
-# Core Hyprland components
+# Core Hyprland components and libraries
 dnf5 install -y \
     hyprland \
+    hyprlang \
+    hyprutils \
+    hyprwayland-scanner \
     hyprpaper \
     hypridle \
     hyprlock \
-    hyprutils \
     xdg-desktop-portal-hyprland
 
 # Configure SDDM (already installed in base image)
