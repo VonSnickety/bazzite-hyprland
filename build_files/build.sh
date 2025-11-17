@@ -159,7 +159,7 @@ rpm-ostree override remove \
 ### Install Essential Packages
 
 # Basic utilities
-dnf5 install -y \
+dnf5 install -y --skip-broken \
     tmux \
     firefox \
     fastfetch
